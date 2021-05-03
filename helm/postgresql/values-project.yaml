@@ -1,0 +1,28 @@
+## PostgreSQL password using existing secret
+existingSecret: secrets-postgres
+
+extraEnv:
+  - name: PGPASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: secrets-postgres
+        key: postgresql-password
+  - name: POSTGRES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: secrets-postgres
+        key: postgresql-password
+  - name: POSTGRES_DB
+    value: postgres  
+  - name: PROJECT_DB
+    value: project
+  - name: PROJECT_ADMIN
+    valueFrom:
+      secretKeyRef:
+        name: secrets-postgres
+        key: project-username
+  - name: PROJECT_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: secrets-postgres
+        key: project-password
